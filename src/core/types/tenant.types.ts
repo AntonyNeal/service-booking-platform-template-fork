@@ -1,9 +1,12 @@
 // Multi-Tenant Platform - Type Definitions
 // Shared types across all tenants
 
-import type { AestheticStyle } from '../../design-system/tokens/aesthetic.tokens';
-import type { IndustryType, ColorPalette } from '../../design-system/tokens/industry.tokens';
-import { baseTokens } from '../../design-system/tokens/base.tokens';
+import type {
+  AestheticStyle,
+  IndustryType,
+  ColorPalette,
+} from '@your-organization/service-booking-sdk';
+import { baseTokens } from '@your-organization/service-booking-sdk';
 
 /**
  * Tenant Theme Configuration

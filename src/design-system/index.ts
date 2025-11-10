@@ -3,7 +3,7 @@
  * Theme-aware components and tokens for multi-tenant platform
  */
 
-// Components
+// Components (app-specific, use React context)
 export { Button } from './components/Button';
 export type { ButtonProps } from './components/Button';
 
@@ -16,23 +16,31 @@ export type { ModalProps } from './components/Modal';
 export { Input, Textarea } from './components/Input';
 export type { InputProps, TextareaProps } from './components/Input';
 
-// Tokens
-export { baseTokens } from './tokens/base.tokens';
-export type { BaseTokens } from './tokens/base.tokens';
-
-export { aestheticTokens, getAestheticSpacing } from './tokens/aesthetic.tokens';
-export type { AestheticStyle, AestheticTokens } from './tokens/aesthetic.tokens';
-
-export { industryPalettes } from './tokens/industry.tokens';
-export type { IndustryType, ColorPalette } from './tokens/industry.tokens';
-
-// Theme Generator
+// Tokens (re-export from SDK for convenience)
 export {
-  generateTheme,
+  baseTokens,
+  aestheticTokens,
+  getAestheticSpacing,
+  industryPalettes,
+  type BaseTokens,
+  type AestheticStyle,
+  type AestheticTokens,
+  type IndustryType,
+  type ColorPalette,
+} from '@your-organization/service-booking-sdk';
+
+// Theme Generator (re-export from SDK, but wrap for app compatibility)
+export { generateTheme } from './generator/theme-generator';
+export type { ThemeGeneratorInput } from './generator/theme-generator';
+
+// Also export SDK version for direct use
+export {
+  generateDesignSystemTheme,
   generateColorPalette,
   generateSubdomain,
   isValidHex,
   getDefaultServices,
   getTaglineTemplate,
-} from './generator/theme-generator';
-export type { ThemeGeneratorInput } from './generator/theme-generator';
+  type DesignSystemThemeInput,
+  type DesignSystemTheme,
+} from '@your-organization/service-booking-sdk';

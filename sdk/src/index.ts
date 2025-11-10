@@ -53,6 +53,38 @@ export { BookingPlugin, TenantPlugin } from './plugins';
 export * from './types';
 
 // ============================================================================
+// DESIGN SYSTEM
+// ============================================================================
+
+// Design Tokens
+export { baseTokens } from './design-system/tokens/base';
+export type { BaseTokens } from './design-system/tokens/base';
+
+export {
+  aestheticTokens,
+  getAestheticSpacing,
+} from './design-system/tokens/aesthetic';
+export type {
+  AestheticStyle,
+  AestheticTokens,
+} from './design-system/tokens/aesthetic';
+
+export { industryPalettes } from './design-system/tokens/industry';
+export type { IndustryType, ColorPalette } from './design-system/tokens/industry';
+
+// Design System Theme Generator
+export {
+  generateDesignSystemTheme,
+  generateColorPalette,
+  generateSubdomain,
+  isValidHex,
+  getDefaultServices,
+  getTaglineTemplate,
+  type DesignSystemThemeInput,
+  type DesignSystemTheme,
+} from './generators/design-system';
+
+// ============================================================================
 // DATA SOURCES (Instance-based, extends BaseDataSource)
 // ============================================================================
 
