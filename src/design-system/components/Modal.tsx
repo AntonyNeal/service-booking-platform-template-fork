@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect } from 'react';
-import { useTenant } from '../../core/providers/TenantProvider';
+import { useTenant } from '../../core/hooks/useTenant';
 import { baseTokens } from '../tokens/base.tokens';
 import { aestheticTokens } from '../tokens/aesthetic.tokens';
 
