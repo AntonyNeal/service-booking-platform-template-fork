@@ -54,9 +54,7 @@ export interface DesignSystemTheme {
 /**
  * Generate a complete theme configuration for a tenant
  */
-export function generateDesignSystemTheme(
-  input: DesignSystemThemeInput
-): DesignSystemTheme {
+export function generateDesignSystemTheme(input: DesignSystemThemeInput): DesignSystemTheme {
   const { industry, aesthetic, primaryColor } = input;
 
   // Get base color palette for industry
@@ -172,9 +170,7 @@ function adjustBrightness(hex: string, percent: number): string {
 /**
  * Map aesthetic style to legacy layout
  */
-function mapAestheticToLayout(
-  aesthetic: AestheticStyle
-): 'elegant' | 'modern' | 'minimal' {
+function mapAestheticToLayout(aesthetic: AestheticStyle): 'elegant' | 'modern' | 'minimal' {
   switch (aesthetic) {
     case 'minimalist':
       return 'minimal';
@@ -236,36 +232,11 @@ export function isValidHex(hex: string): boolean {
  */
 export function getDefaultServices(industry: IndustryType): string[] {
   const serviceMap: Record<IndustryType, string[]> = {
-    healthcare: [
-      'Consultation',
-      'Treatment',
-      'Follow-up',
-      'Emergency Care',
-    ],
-    retail: [
-      'Product Selection',
-      'Personal Shopping',
-      'Styling Session',
-      'Gift Consultation',
-    ],
-    professional: [
-      'Consultation',
-      'Strategy Session',
-      'Implementation',
-      'Follow-up',
-    ],
-    hospitality: [
-      'Room Service',
-      'Concierge',
-      'Event Planning',
-      'Catering',
-    ],
-    fitness: [
-      'Personal Training',
-      'Group Class',
-      'Nutrition Consultation',
-      'Wellness Assessment',
-    ],
+    healthcare: ['Consultation', 'Treatment', 'Follow-up', 'Emergency Care'],
+    retail: ['Product Selection', 'Personal Shopping', 'Styling Session', 'Gift Consultation'],
+    professional: ['Consultation', 'Strategy Session', 'Implementation', 'Follow-up'],
+    hospitality: ['Room Service', 'Concierge', 'Event Planning', 'Catering'],
+    fitness: ['Personal Training', 'Group Class', 'Nutrition Consultation', 'Wellness Assessment'],
     beauty: ['Haircut', 'Coloring', 'Styling', 'Treatment'],
     education: ['Tutoring Session', 'Workshop', 'Course', 'Assessment'],
     technology: ['Consultation', 'Development', 'Training', 'Support'],

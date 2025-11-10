@@ -5,39 +5,47 @@ This template includes a comprehensive design tokens system and theme generator 
 ## Quick Start for New Clients
 
 ### 1. Fork & Clone
+
 ```bash
 git clone https://github.com/your-username/service-booking-platform-template.git my-new-client
 cd my-new-client
 ```
 
 ### 2. Run Setup Wizard
+
 ```bash
 npm install
 npm run setup
 ```
 
 The interactive wizard will ask you 4 simple questions:
+
 1. **Business Name**: Client's business name
 2. **Industry**: Healthcare, Retail, Professional, Hospitality, Fitness, Beauty, Education, Technology, or Other
 3. **Design Aesthetic**: Modern, Elegant, Minimalist, or Bold
 4. **Domain**: Their website domain
 
 ### 3. Customize with Copilot
+
 Tell GitHub Copilot:
+
 ```
 "Fill in content for [Business Name] in [Industry] industry"
 ```
 
 Copilot will help you customize:
+
 - Service descriptions
 - Business bio
 - Contact information
 - SEO content
 
 ### 4. Add Photos
+
 Replace placeholder images in `src/tenants/[tenant-id]/photos.config.ts` with actual client photos.
 
 ### 5. Deploy
+
 ```bash
 npm run build
 npm run deploy:azure
@@ -51,6 +59,7 @@ npm run deploy:azure
 ## Design System Overview
 
 ### What It Does
+
 The design system automatically generates:
 ✅ Complete color palettes (primary, secondary, accent, neutrals, semantic)
 ✅ Spacing, border radius, shadows, and typography scales
@@ -76,22 +85,26 @@ Each industry comes with carefully selected colors:
 Choose the visual style that matches your client's brand:
 
 **Minimalist**
+
 - Maximum whitespace
 - Light fonts and shadows
 - Simple, clean design
 
 **Modern** (Default)
+
 - Balanced spacing
 - Medium shadows
 - Professional and versatile
 
 **Elegant**
+
 - Generous spacing
 - Prominent shadows
 - Soft, rounded corners
 - Sophisticated feel
 
 **Bold**
+
 - Compact layout
 - Strong shadows
 - High contrast
@@ -159,7 +172,9 @@ import { Button, Card, Modal, Input } from '@/design-system';
 ## Customization Guide
 
 ### Override Primary Color
+
 During setup, you can provide a custom hex color:
+
 ```
 Custom Primary Color: #FF6B6B
 ```
@@ -167,6 +182,7 @@ Custom Primary Color: #FF6B6B
 The system will automatically generate hover, light, and dark variants.
 
 ### Modify Aesthetic After Setup
+
 Edit `src/tenants/[tenant-id]/theme.config.ts`:
 
 ```typescript
@@ -178,6 +194,7 @@ export const theme: TenantTheme = {
 ```
 
 ### Add Custom Services
+
 Edit `src/tenants/[tenant-id]/content.config.ts`:
 
 ```typescript
@@ -199,6 +216,7 @@ services: [
 ## Advanced Features
 
 ### A/B Testing Photos
+
 The hero photo supports A/B testing:
 
 ```typescript
@@ -212,6 +230,7 @@ hero: {
 ```
 
 ### Custom Tokens
+
 Override specific tokens in theme.config.ts:
 
 ```typescript
@@ -228,16 +247,19 @@ tokens: {
 ## Deployment
 
 ### Azure Static Web Apps
+
 ```bash
 npm run deploy:azure
 ```
 
 ### Vercel
+
 ```bash
 vercel --prod
 ```
 
 ### DigitalOcean App Platform
+
 ```bash
 doctl apps create --spec deployment/app-spec-digitalocean.yaml
 ```
@@ -247,7 +269,9 @@ doctl apps create --spec deployment/app-spec-digitalocean.yaml
 ## Troubleshooting
 
 ### Component Not Using Theme
+
 Make sure the component imports from the design system:
+
 ```typescript
 // ✅ Good
 import { Button } from '@/design-system';
@@ -257,12 +281,15 @@ import { Button } from './components/Button';
 ```
 
 ### Colors Not Updating
+
 1. Clear browser cache
 2. Restart dev server
 3. Check that theme.config.ts exports are correct
 
 ### Setup Script Fails
+
 Ensure you have Node.js 20+ and run:
+
 ```bash
 npm install
 ```
@@ -283,6 +310,7 @@ npm install
 ## Contributing
 
 Improvements to the design system are welcome! Focus areas:
+
 - New industry color palettes
 - Additional aesthetic styles
 - More theme-aware components
@@ -293,6 +321,7 @@ Improvements to the design system are welcome! Focus areas:
 ## Support
 
 For questions or issues:
+
 - Check existing tenants for examples
 - Review design-system/ source code
 - Open an issue on GitHub

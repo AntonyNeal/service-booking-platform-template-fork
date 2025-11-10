@@ -23,11 +23,12 @@ Answer 4 simple questions and get:
 
 ## 🎯 Quick Start for New Users
 
-**Want to create your own booking app?** 
+**Want to create your own booking app?**
 
 👉 **[READ THE FORK & CUSTOMIZE GUIDE](./FORK-AND-CUSTOMIZE.md)** 👈
 
 This guide walks you through:
+
 1. Forking this repository
 2. Using the SDK generators to create your theme
 3. Customizing content for your business
@@ -35,6 +36,7 @@ This guide walks you through:
 5. Deploying to Azure
 
 **Built-in SDK Generators:**
+
 - 🎨 **Theme Generator** - Create complete themes from prompts like "fitness studio with modern blue theme"
 - 🚀 **App Generator** - Generate entire app configurations from natural language
 - 📊 **SEO Generator** - Auto-generate Open Graph and Twitter Card meta tags

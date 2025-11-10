@@ -30,7 +30,7 @@ export interface ThemeGeneratorInput {
 export function generateTheme(input: ThemeGeneratorInput): TenantTheme {
   // Use SDK generator
   const theme = generateDesignSystemTheme(input);
-  
+
   // Cast to TenantTheme (they're compatible)
   return theme as TenantTheme;
 }
@@ -41,4 +41,3 @@ export const generateSubdomain = sdkGenerateSubdomain;
 export const isValidHex = sdkIsValidHex;
 export const getDefaultServices = sdkGetDefaultServices;
 export const getTaglineTemplate = sdkGetTaglineTemplate;
-

@@ -60,14 +60,8 @@ export * from './types';
 export { baseTokens } from './design-system/tokens/base';
 export type { BaseTokens } from './design-system/tokens/base';
 
-export {
-  aestheticTokens,
-  getAestheticSpacing,
-} from './design-system/tokens/aesthetic';
-export type {
-  AestheticStyle,
-  AestheticTokens,
-} from './design-system/tokens/aesthetic';
+export { aestheticTokens, getAestheticSpacing } from './design-system/tokens/aesthetic';
+export type { AestheticStyle, AestheticTokens } from './design-system/tokens/aesthetic';
 
 export { industryPalettes } from './design-system/tokens/industry';
 export type { IndustryType, ColorPalette } from './design-system/tokens/industry';
