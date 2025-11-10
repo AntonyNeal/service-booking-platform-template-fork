@@ -2,6 +2,25 @@
 
 A comprehensive, multi-tenant service booking platform built with React, TypeScript, and Vite. This template provides a complete foundation for building booking systems across various industries including consulting, coaching, professional services, and more.
 
+## ⚡ NEW: 5-Minute Fork Workflow
+
+**Fork a new client in 5 minutes with our design tokens system!**
+
+```bash
+npm install
+npm run setup
+```
+
+Answer 4 simple questions and get:
+✅ Complete theme with industry-appropriate colors
+✅ Aesthetic-specific design tokens (spacing, shadows, typography)
+✅ Generated tenant configuration files
+✅ Zero hardcoded styles to update
+
+**[Read the complete 5-Minute Fork Workflow Guide →](./FORK-WORKFLOW.md)**
+
+---
+
 ## 🎯 Quick Start for New Users
 
 **Want to create your own booking app?** 

@@ -1,11 +1,27 @@
 // Multi-Tenant Platform - Type Definitions
 // Shared types across all tenants
 
+import type { AestheticStyle } from '../../design-system/tokens/aesthetic.tokens';
+import type { IndustryType, ColorPalette } from '../../design-system/tokens/industry.tokens';
+import { baseTokens } from '../../design-system/tokens/base.tokens';
+
 /**
  * Tenant Theme Configuration
  * Defines visual styling for each tenant
  */
 export interface TenantTheme {
+  // Design System Properties (NEW)
+  aesthetic?: AestheticStyle; // 'minimalist' | 'modern' | 'elegant' | 'bold'
+  industry?: IndustryType; // 'healthcare' | 'retail' | 'professional' | etc.
+  tokens?: {
+    spacing?: Partial<typeof baseTokens.spacing>;
+    radius?: Partial<typeof baseTokens.radius>;
+    shadows?: Partial<typeof baseTokens.shadows>;
+    typography?: Partial<typeof baseTokens.typography>;
+  };
+  palette?: ColorPalette; // Generated color palette
+
+  // Legacy Properties (for backward compatibility)
   colors: {
     primary: string;
     secondary: string;
