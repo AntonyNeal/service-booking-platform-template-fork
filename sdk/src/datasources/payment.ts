@@ -47,12 +47,16 @@ interface RefundResponse {
 }
 
 export class PaymentDataSource {
-  private static client = new ApiClient();
+  private client: ApiClient;
+
+  constructor(client?: ApiClient) {
+    this.client = client || new ApiClient('');
+  }
 
   /**
    * Create a new payment
    */
-  static async create(payment: CreatePaymentRequest): Promise<Payment> {
+  async create(payment: CreatePaymentRequest): Promise<Payment> {
     const response = await this.client.post<ApiResponse<Payment>>('/payments', {
       ...payment,
       currency: payment.currency || 'AUD',
@@ -64,7 +68,7 @@ export class PaymentDataSource {
   /**
    * Get a payment by ID
    */
-  static async getById(paymentId: string | number): Promise<Payment> {
+  async getById(paymentId: string | number): Promise<Payment> {
     const response = await this.client.get<ApiResponse<Payment>>(`/payments/${paymentId}`);
     return response.data;
   }
@@ -72,7 +76,7 @@ export class PaymentDataSource {
   /**
    * Get all payments for a booking
    */
-  static async getByBooking(bookingId: string | number): Promise<Payment[]> {
+  async getByBooking(bookingId: string | number): Promise<Payment[]> {
     const response = await this.client.get<ApiResponse<Payment[]>>(
       `/payments/booking/${bookingId}`
     );
@@ -82,7 +86,7 @@ export class PaymentDataSource {
   /**
    * Get all payments for a tenant
    */
-  static async getByTenant(
+  async getByTenant(
     tenantId: string | number,
     status?: string,
     page: number = 1,
@@ -91,13 +95,13 @@ export class PaymentDataSource {
     const params: Record<string, string | number> = { page, limit };
     if (status) params.status = status;
 
-    return this.client.get<ListResponse<Payment>>(`/payments/tenant/${tenantId}`, params);
+    return this.client.get<ListResponse<Payment>>(`/payments/tenant/${tenantId}`, { params });
   }
 
   /**
    * Refund a payment (full or partial)
    */
-  static async refund(
+  async refund(
     paymentId: string | number,
     refundData?: RefundRequest
   ): Promise<RefundResponse> {
@@ -111,7 +115,7 @@ export class PaymentDataSource {
   /**
    * Get payment status
    */
-  static async getStatus(paymentId: string | number): Promise<string> {
+  async getStatus(paymentId: string | number): Promise<string> {
     const payment = await this.getById(paymentId);
     return payment.status;
   }
@@ -119,7 +123,7 @@ export class PaymentDataSource {
   /**
    * Check if payment is completed
    */
-  static async isCompleted(paymentId: string | number): Promise<boolean> {
+  async isCompleted(paymentId: string | number): Promise<boolean> {
     const payment = await this.getById(paymentId);
     return payment.status === 'completed';
   }
@@ -127,7 +131,7 @@ export class PaymentDataSource {
   /**
    * Get total payments for a tenant (within date range)
    */
-  static async getTotalRevenue(
+  async getTotalRevenue(
     tenantId: string | number,
     startDate?: string,
     endDate?: string

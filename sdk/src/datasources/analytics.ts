@@ -43,21 +43,25 @@ interface CreateEventRequest {
 }
 
 export class AnalyticsDataSource {
-  private static client = new ApiClient();
-  private static currentSessionId: string | null = null;
-  private static currentSessionToken: string | null = null;
+  private client: ApiClient;
+  private currentSessionId: string | null = null;
+  private currentSessionToken: string | null = null;
+
+  constructor(client?: ApiClient) {
+    this.client = client || new ApiClient('');
+  }
 
   /**
    * Generate a unique session token
    */
-  private static generateSessionToken(): string {
+  private generateSessionToken(): string {
     return `${Date.now()}-${Math.random().toString(36).substring(2, 15)}`;
   }
 
   /**
    * Create a new analytics session
    */
-  static async createSession(data: CreateSessionRequest): Promise<SessionResponse> {
+  async createSession(data: CreateSessionRequest): Promise<SessionResponse> {
     // Generate session token if not provided
     const sessionToken = data.sessionToken || this.generateSessionToken();
 
@@ -74,14 +78,14 @@ export class AnalyticsDataSource {
   /**
    * Track an event
    */
-  static async trackEvent(event: CreateEventRequest): Promise<void> {
+  async trackEvent(event: CreateEventRequest): Promise<void> {
     await this.client.post('/analytics/events', event);
   }
 
   /**
    * Track an event for the current session
    */
-  static async track(
+  async track(
     eventType: string,
     eventData?: Record<string, unknown>,
     pageUrl?: string,
@@ -105,7 +109,7 @@ export class AnalyticsDataSource {
   /**
    * Get session details
    */
-  static async getSession(sessionId: string): Promise<SessionResponse> {
+  async getSession(sessionId: string): Promise<SessionResponse> {
     const response = await this.client.get<ApiResponse<SessionResponse>>(
       `/analytics/sessions/${sessionId}`
     );
@@ -115,7 +119,7 @@ export class AnalyticsDataSource {
   /**
    * Get analytics summary for a tenant
    */
-  static async getSummary(
+  async getSummary(
     tenantId: string | number,
     startDate?: string,
     endDate?: string
@@ -126,7 +130,7 @@ export class AnalyticsDataSource {
 
     const response = await this.client.get<ApiResponse<AnalyticsSummary>>(
       `/analytics/${tenantId}`,
-      params
+      { params }
     );
     return response.data;
   }
@@ -134,7 +138,7 @@ export class AnalyticsDataSource {
   /**
    * Initialize session tracking automatically
    */
-  static async initialize(
+  async initialize(
     tenantId: string | number,
     utmParams?: Record<string, string>
   ): Promise<string> {
@@ -157,14 +161,14 @@ export class AnalyticsDataSource {
   /**
    * Get current session ID
    */
-  static getSessionId(): string | null {
+  getSessionId(): string | null {
     return this.currentSessionId;
   }
 
   /**
    * Get current session token
    */
-  static getSessionToken(): string | null {
+  getSessionToken(): string | null {
     return this.currentSessionToken;
   }
 }

@@ -6,12 +6,16 @@ import { ApiClient } from '../client';
 import { Location, ListResponse } from '../types';
 
 export class LocationDataSource {
-  private static client = new ApiClient();
+  private client: ApiClient;
+
+  constructor(client?: ApiClient) {
+    this.client = client || new ApiClient('');
+  }
 
   /**
    * Get all locations for a tenant
    */
-  static async getByTenant(tenantId: string | number): Promise<Location[]> {
+  async getByTenant(tenantId: string | number): Promise<Location[]> {
     const response = await this.client.get<ListResponse<Location>>(`/locations/${tenantId}`);
     return response.data;
   }
@@ -19,7 +23,7 @@ export class LocationDataSource {
   /**
    * Get locations grouped by country
    */
-  static async getGroupedByCountry(tenantId: string | number): Promise<Record<string, Location[]>> {
+  async getGroupedByCountry(tenantId: string | number): Promise<Record<string, Location[]>> {
     const locations = await this.getByTenant(tenantId);
 
     return locations.reduce(
@@ -38,7 +42,7 @@ export class LocationDataSource {
   /**
    * Get locations with availability
    */
-  static async getAvailable(tenantId: string | number): Promise<Location[]> {
+  async getAvailable(tenantId: string | number): Promise<Location[]> {
     const locations = await this.getByTenant(tenantId);
     return locations.filter(
       (loc) => loc.availableDatesCount !== undefined && loc.availableDatesCount > 0

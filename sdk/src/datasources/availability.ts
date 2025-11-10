@@ -41,12 +41,16 @@ export interface AvailableDate {
 }
 
 export class AvailabilityDataSource {
-  private static client = new ApiClient();
+  private client: ApiClient;
+
+  constructor(client?: ApiClient) {
+    this.client = client || new ApiClient('');
+  }
 
   /**
    * Get availability calendar for a tenant
    */
-  static async getCalendar(
+  async getCalendar(
     tenantId: string | number,
     startDate?: string,
     endDate?: string
@@ -57,7 +61,7 @@ export class AvailabilityDataSource {
 
     const response = await this.client.get<ListResponse<AvailabilitySlot>>(
       `/availability/${tenantId}`,
-      params
+      { params }
     );
     return response.data;
   }
@@ -65,20 +69,20 @@ export class AvailabilityDataSource {
   /**
    * Check availability for a specific date
    */
-  static async checkDate(
+  async checkDate(
     tenantId: string | number,
     date: string
   ): Promise<{ available: boolean; slot?: AvailabilitySlot }> {
     const response = await this.client.get<
       ApiResponse<{ available: boolean; slot?: AvailabilitySlot }>
-    >(`/availability/${tenantId}/check`, { date });
+    >(`/availability/${tenantId}/check`, { params: { date } });
     return response.data;
   }
 
   /**
    * Get available dates within a range
    */
-  static async getAvailableDates(
+  async getAvailableDates(
     tenantId: string | number,
     startDate: string,
     endDate: string
@@ -90,13 +94,13 @@ export class AvailabilityDataSource {
   /**
    * Get touring schedule (upcoming locations)
    */
-  static async getTouringSchedule(
+  async getTouringSchedule(
     tenantId: string | number,
     daysAhead: number = 90
   ): Promise<TouringLocation[]> {
     const response = await this.client.get<{ success: boolean; data: TouringLocation[] }>(
       `/availability/${tenantId}/touring-schedule`,
-      { daysAhead }
+      { params: { daysAhead } }
     );
     return response.data;
   }
@@ -104,7 +108,7 @@ export class AvailabilityDataSource {
   /**
    * Get current location
    */
-  static async getCurrentLocation(tenantId: string | number): Promise<CurrentLocation> {
+  async getCurrentLocation(tenantId: string | number): Promise<CurrentLocation> {
     const response = await this.client.get<ApiResponse<CurrentLocation>>(
       `/availability/${tenantId}/current-location`
     );
@@ -114,7 +118,7 @@ export class AvailabilityDataSource {
   /**
    * Check availability for a specific date (advanced)
    */
-  static async checkAvailabilityForDate(
+  async checkAvailabilityForDate(
     tenantId: string | number,
     date: string,
     durationHours?: number
@@ -124,7 +128,7 @@ export class AvailabilityDataSource {
 
     const response = await this.client.get<{ success: boolean; data: DateAvailability[] }>(
       `/availability/${tenantId}/check/${date}`,
-      params
+      { params }
     );
     return response.data;
   }
@@ -132,14 +136,14 @@ export class AvailabilityDataSource {
   /**
    * Get available dates in range (optimized)
    */
-  static async getAvailableDatesList(
+  async getAvailableDatesList(
     tenantId: string | number,
     startDate: string,
     endDate: string
   ): Promise<AvailableDate[]> {
     const response = await this.client.get<{ success: boolean; data: AvailableDate[] }>(
       `/availability/${tenantId}/dates`,
-      { startDate, endDate }
+      { params: { startDate, endDate } }
     );
     return response.data;
   }

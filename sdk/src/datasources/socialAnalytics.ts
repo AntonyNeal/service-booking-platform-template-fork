@@ -131,12 +131,16 @@ export interface FollowerGrowthSummary {
 }
 
 export class SocialAnalyticsDataSource {
-  private static client = new ApiClient();
+  private client: ApiClient;
+
+  constructor(client?: ApiClient) {
+    this.client = client || new ApiClient('');
+  }
 
   /**
    * Get individual post performance metrics
    */
-  static async getPostPerformance(
+  async getPostPerformance(
     tenantId: string | number,
     platform?: string,
     limit: number = 50
@@ -146,7 +150,7 @@ export class SocialAnalyticsDataSource {
 
     const response = await this.client.get<{ success: boolean; data: PostPerformance[] }>(
       `/social-analytics/${tenantId}/post-performance`,
-      params
+      { params }
     );
     return response.data;
   }
@@ -154,7 +158,7 @@ export class SocialAnalyticsDataSource {
   /**
    * Get platform comparison metrics
    */
-  static async getPlatformPerformance(tenantId: string | number): Promise<PlatformPerformance[]> {
+  async getPlatformPerformance(tenantId: string | number): Promise<PlatformPerformance[]> {
     const response = await this.client.get<{ success: boolean; data: PlatformPerformance[] }>(
       `/social-analytics/${tenantId}/platform-performance`
     );
@@ -164,10 +168,10 @@ export class SocialAnalyticsDataSource {
   /**
    * Get top performing posts
    */
-  static async getTopPosts(tenantId: string | number, limit: number = 10): Promise<TopPost[]> {
+  async getTopPosts(tenantId: string | number, limit: number = 10): Promise<TopPost[]> {
     const response = await this.client.get<{ success: boolean; data: TopPost[] }>(
       `/social-analytics/${tenantId}/top-posts`,
-      { limit }
+      { params: { limit } }
     );
     return response.data;
   }
@@ -175,14 +179,14 @@ export class SocialAnalyticsDataSource {
   /**
    * Get top performing hashtags
    */
-  static async getTopHashtags(
+  async getTopHashtags(
     tenantId: string | number,
     days: number = 90,
     limit: number = 20
   ): Promise<TopHashtag[]> {
     const response = await this.client.get<{ success: boolean; data: TopHashtag[] }>(
       `/social-analytics/${tenantId}/top-hashtags`,
-      { days, limit }
+      { params: { days, limit } }
     );
     return response.data;
   }
@@ -190,7 +194,7 @@ export class SocialAnalyticsDataSource {
   /**
    * Get daily social media metrics
    */
-  static async getDailyMetrics(
+  async getDailyMetrics(
     tenantId: string | number,
     platform?: string,
     startDate?: string,
@@ -204,7 +208,7 @@ export class SocialAnalyticsDataSource {
 
     const response = await this.client.get<{ success: boolean; data: DailyMetric[] }>(
       `/social-analytics/${tenantId}/daily-metrics`,
-      params
+      { params }
     );
     return response.data;
   }
@@ -212,7 +216,7 @@ export class SocialAnalyticsDataSource {
   /**
    * Get follower growth over time
    */
-  static async getFollowerGrowth(
+  async getFollowerGrowth(
     tenantId: string | number,
     platform?: string,
     days: number = 90
@@ -224,7 +228,7 @@ export class SocialAnalyticsDataSource {
       success: boolean;
       data: FollowerGrowthPoint[];
       summary: FollowerGrowthSummary[];
-    }>(`/social-analytics/${tenantId}/follower-growth`, params);
+    }>(`/social-analytics/${tenantId}/follower-growth`, { params });
 
     return {
       data: response.data,

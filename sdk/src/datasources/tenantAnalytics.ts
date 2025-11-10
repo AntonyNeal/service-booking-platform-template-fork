@@ -72,12 +72,16 @@ export interface ABTestResult {
 }
 
 export class TenantAnalyticsDataSource {
-  private static client = new ApiClient();
+  private client: ApiClient;
+
+  constructor(client?: ApiClient) {
+    this.client = client || new ApiClient('');
+  }
 
   /**
    * Get tenant performance summary
    */
-  static async getPerformance(tenantId: string | number): Promise<TenantPerformance> {
+  async getPerformance(tenantId: string | number): Promise<TenantPerformance> {
     const response = await this.client.get<ApiResponse<TenantPerformance>>(
       `/tenant-analytics/${tenantId}/performance`
     );
@@ -87,7 +91,7 @@ export class TenantAnalyticsDataSource {
   /**
    * Get traffic sources (UTM attribution)
    */
-  static async getTrafficSources(tenantId: string | number): Promise<TrafficSource[]> {
+  async getTrafficSources(tenantId: string | number): Promise<TrafficSource[]> {
     const response = await this.client.get<{ success: boolean; data: TrafficSource[] }>(
       `/tenant-analytics/${tenantId}/traffic-sources`
     );
@@ -97,7 +101,7 @@ export class TenantAnalyticsDataSource {
   /**
    * Get booking analytics by location
    */
-  static async getLocationBookings(tenantId: string | number): Promise<LocationBooking[]> {
+  async getLocationBookings(tenantId: string | number): Promise<LocationBooking[]> {
     const response = await this.client.get<{ success: boolean; data: LocationBooking[] }>(
       `/tenant-analytics/${tenantId}/location-bookings`
     );
@@ -107,7 +111,7 @@ export class TenantAnalyticsDataSource {
   /**
    * Get availability utilization rates
    */
-  static async getAvailabilityUtilization(
+  async getAvailabilityUtilization(
     tenantId: string | number,
     startDate?: string,
     endDate?: string
@@ -118,7 +122,7 @@ export class TenantAnalyticsDataSource {
 
     const response = await this.client.get<{ success: boolean; data: AvailabilityUtilization[] }>(
       `/tenant-analytics/${tenantId}/availability-utilization`,
-      params
+      { params }
     );
     return response.data;
   }
@@ -126,7 +130,7 @@ export class TenantAnalyticsDataSource {
   /**
    * Get conversion funnel data
    */
-  static async getConversionFunnel(
+  async getConversionFunnel(
     tenantId: string | number,
     startDate?: string,
     endDate?: string
@@ -137,7 +141,7 @@ export class TenantAnalyticsDataSource {
 
     const response = await this.client.get<{ success: boolean; data: ConversionFunnelStage[] }>(
       `/tenant-analytics/${tenantId}/conversion-funnel`,
-      params
+      { params }
     );
     return response.data;
   }
@@ -145,7 +149,7 @@ export class TenantAnalyticsDataSource {
   /**
    * Get A/B test results
    */
-  static async getABTestResults(tenantId: string | number): Promise<ABTestResult[]> {
+  async getABTestResults(tenantId: string | number): Promise<ABTestResult[]> {
     const response = await this.client.get<{ success: boolean; data: ABTestResult[] }>(
       `/tenant-analytics/${tenantId}/ab-test-results`
     );
