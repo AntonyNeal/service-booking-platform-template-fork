@@ -1,5 +1,5 @@
 import { useTenant } from '../../../core/hooks/useTenant';
-import React from 'react';
+// React import is not necessary for this component
 
 export default function JsonLd() {
   const { content } = useTenant();

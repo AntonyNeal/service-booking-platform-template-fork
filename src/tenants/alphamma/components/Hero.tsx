@@ -1,5 +1,6 @@
 import { useTenant } from '../../../core/hooks/useTenant';
-import styles from '../styles.module.css';
+// styles module purposely not directly referenced in JSX to keep Tailwind-like classes,
+// but imported CSS file is present at runtime;
 
 export default function Hero() {
   const { content, photos } = useTenant();
