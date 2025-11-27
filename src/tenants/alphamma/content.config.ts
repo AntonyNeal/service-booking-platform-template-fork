@@ -76,11 +76,17 @@ export const content: TenantContent = {
     availableHours: 'Mon-Fri, 9AM-7PM',
     responseTime: 'Typically within 24 hours',
     preferredContact: 'phone',
+    address: '3/57 Munibung Road, Cardiff NSW 2285, Australia',
   },
   socialMedia: {
     facebook: 'https://www.facebook.com/alphammapg',
     instagram: 'https://www.instagram.com/alphamma__newcastle',
   },
+  coaches: [
+    { id: 'ben-cook', name: 'Ben Cook', role: 'Head Coach', bio: 'Owner and Head Coach with 20+ years of experience', photoId: 'ben-cook' },
+    { id: 'simon-arentz', name: 'Simon Arentz', role: 'Striking Coach', bio: 'Kickboxing and striking specialist', photoId: 'simon-arentz' },
+    { id: 'jamie-ballard', name: 'Jamie Ballard', role: 'BJJ Coach', bio: 'Brazilian Jiu-Jitsu Black Belt and Coach', photoId: 'jamie-ballard' },
+  ],
   availability: {
     location: 'Cardiff, NSW',
     timezone: 'Australia/Sydney',

@@ -8,6 +8,10 @@ import SouthernCross from '../components/SouthernCross';
 import AussieWeatherWidget from '../components/AussieWeatherWidget';
 import FloatingAussieMascot from '../components/FloatingAussieMascot';
 import '../styles/neo-australian.css';
+// Alphamma tenant components - render conditionally
+import HeroAlpha from '../tenants/alphamma/components/Hero';
+import ScheduleGrid from '../tenants/alphamma/components/ScheduleGrid';
+import JsonLdAlpha from '../tenants/alphamma/components/JsonLd';
 
 export default function Home() {
   const { content } = useTenant();
@@ -77,6 +81,14 @@ export default function Home() {
       </Helmet>
 
       <div className="home-page bg-black min-h-screen overflow-y-auto">
+        {/* Alphamma: Custom hero & schedule */}
+        {content && content.name === 'Alpha MMA' && (
+          <>
+            <JsonLdAlpha />
+            <HeroAlpha />
+            <ScheduleGrid />
+          </>
+        )}
         {/* Full-Screen Hero Section with Peter Rabbit Background */}
         <section className="relative w-full h-screen overflow-hidden flex items-center justify-center">
           {/* Static Peter Rabbit Background */}

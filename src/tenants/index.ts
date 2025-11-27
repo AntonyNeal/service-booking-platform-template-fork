@@ -6,6 +6,7 @@
 
 import demoConfig from './_template';
 import osullivanfarmsConfig from './osullivanfarms';
+import alphammaConfig from './alphamma';
 import type { TenantConfig } from '../core/types/tenant.types';
 
 /**
@@ -14,6 +15,7 @@ import type { TenantConfig } from '../core/types/tenant.types';
 export const tenants: Record<string, TenantConfig> = {
   demo: demoConfig,
   osullivanfarms: osullivanfarmsConfig,
+  alphamma: alphammaConfig,
   // Add new tenants here:
   // tenant1: tenant1Config,
   // tenant2: tenant2Config,

@@ -81,6 +81,7 @@ export interface Pricing {
  */
 export interface ContactInfo {
   email: string;
+  address?: string;
   phone?: string;
   phoneDisplay?: string;
   whatsapp?: string;
@@ -158,6 +159,24 @@ export interface TenantContent {
     slug: string;
     title: string;
     content: string;
+  }>;
+  schedule?: Array<{
+    id: string;
+    day: string; // Monday, Tuesday, etc.
+    start: string; // HH:mm
+    end?: string; // HH:mm
+    title: string;
+    coach?: string;
+    capacity?: number;
+    featured?: boolean;
+  }>;
+  coaches?: Array<{
+    id: string;
+    name: string;
+    role?: string;
+    bio?: string;
+    photoId?: string | number;
+    social?: SocialMedia;
   }>;
 }
 
