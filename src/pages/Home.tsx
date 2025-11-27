@@ -11,6 +11,7 @@ import '../styles/neo-australian.css';
 // Alphamma tenant components - render conditionally
 import HeroAlpha from '../tenants/alphamma/components/Hero';
 import ScheduleGrid from '../tenants/alphamma/components/ScheduleGrid';
+import CoachCard from '../tenants/alphamma/components/CoachCard';
 import JsonLdAlpha from '../tenants/alphamma/components/JsonLd';
 
 export default function Home() {
@@ -87,6 +88,20 @@ export default function Home() {
             <JsonLdAlpha />
             <HeroAlpha />
             <ScheduleGrid />
+            {/* Coach list */}
+            <section id="coaches" className="py-12">
+              <div className="max-w-6xl mx-auto">
+                <h2 className="text-3xl mb-6">Meet the Coaches</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {content.coaches?.map((coach) => (
+                    <div key={coach.id}>
+                      {/* @ts-ignore */}
+                      <CoachCard coach={coach} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
           </>
         )}
         {/* Full-Screen Hero Section with Peter Rabbit Background */}

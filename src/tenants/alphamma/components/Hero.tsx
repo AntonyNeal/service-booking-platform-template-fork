@@ -1,4 +1,5 @@
 import { useTenant } from '../../../core/hooks/useTenant';
+import { Helmet } from 'react-helmet-async';
 // styles module purposely not directly referenced in JSX to keep Tailwind-like classes,
 // but imported CSS file is present at runtime;
 
@@ -6,6 +7,10 @@ export default function Hero() {
   const { content, photos } = useTenant();
 
   return (
+    <>
+      <Helmet>
+        {photos.hero?.control && <link rel="preload" href={photos.hero.control} as="image" />}
+      </Helmet>
     <section
       className={`w-full min-h-[60vh] flex items-center justify-center text-center text-white alphamma-hero`}
       style={{
