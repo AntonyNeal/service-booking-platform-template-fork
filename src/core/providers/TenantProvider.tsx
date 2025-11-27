@@ -33,7 +33,13 @@ export function TenantProvider({ children }: TenantProviderProps) {
 
         // Detect subdomain or domain
         const hostname = window.location.hostname;
-        const subdomain = getSubdomain(hostname);
+        // Allow developer override via query parameter `?tenant=alphamma` for local testing
+        const urlParams = new URLSearchParams(window.location.search);
+        const previewTenant = urlParams.get('tenant');
+        if (previewTenant) {
+          console.debug('[Tenant] Preview tenant set via query param:', previewTenant);
+        }
+        const subdomain = previewTenant || getSubdomain(hostname);
 
         console.debug('[Tenant] Detected hostname:', hostname);
         console.debug('[Tenant] Extracted subdomain:', subdomain);

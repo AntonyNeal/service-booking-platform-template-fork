@@ -1,0 +1,35 @@
+/* Alphamma tenant custom styles */
+.alphamma-hero {
+  background: linear-gradient(180deg, rgba(11,13,14,0.65), rgba(11,13,14,0.9)), center / cover no-repeat;
+}
+.alphamma-hero .title {
+  font-family: var(--font-heading);
+  letter-spacing: 0.08em;
+}
+.alphamma-hero .tagline {
+  font-family: var(--font-body);
+  color: var(--color-accent);
+}
+.alphamma-schedule {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+.alphamma-schedule .slot {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+}
+.coach-card {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.coach-card img {
+  width: 78px;
+  height: 78px;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
